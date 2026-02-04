@@ -2,20 +2,21 @@ package steps;
 
 import cucumber.api.java.pt.Então;
 import cucumber.api.java.pt.Quando;
-import org.openqa.selenium.By;
 import pages.CadastroPage;
 import runner.RunCucumberTest;
+import support.Utils;
 
 public class CadastroSteps extends RunCucumberTest {
 
 
-CadastroPage cadastroPage = new CadastroPage(driver);
+CadastroPage cadastroPage = new CadastroPage();
+Utils utils = new Utils();
 
     @Quando("^preencho os dados de cadastro$")
     public void preencho_os_dados_de_cadastro() {
-        String nome = cadastroPage.gerarNomeAleatorio();
-        String email = cadastroPage.gerarEmailAleatorio();
-        String senha = cadastroPage.gerarSenhaAleatoria();
+        String nome = utils.gerarNomeAleatorio();
+        String email = utils.gerarEmailAleatorio();
+        String senha = utils.gerarSenhaAleatoria();
 
         cadastroPage.preencherNome(nome);
         cadastroPage.preencherEmail(email);
