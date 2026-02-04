@@ -10,12 +10,16 @@ public class CadastroSteps extends RunCucumberTest {
 
 
 CadastroPage cadastroPage = new CadastroPage(driver);
+
     @Quando("^preencho os dados de cadastro$")
     public void preencho_os_dados_de_cadastro() {
-        cadastroPage.preencherNome("Alexandre");
-        cadastroPage.preencherEmail("alexandre.teste@teste.com");
-        cadastroPage.preencherSenha("S3nh4T3st3@");
+        String nome = cadastroPage.gerarNomeAleatorio();
+        String email = cadastroPage.gerarEmailAleatorio();
+        String senha = cadastroPage.gerarSenhaAleatoria();
 
+        cadastroPage.preencherNome(nome);
+        cadastroPage.preencherEmail(email);
+        cadastroPage.preencherSenha(senha);
     }
 
     @Quando("^clico no botão de registrar$")
