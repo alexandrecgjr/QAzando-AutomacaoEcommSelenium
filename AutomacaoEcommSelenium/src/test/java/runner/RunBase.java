@@ -6,7 +6,7 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 
 public class RunBase {
 
-    static WebDriver driver;
+    protected static WebDriver driver;
 
     public enum Browser {
         CHROME,
@@ -14,22 +14,16 @@ public class RunBase {
     }
 
     public static WebDriver getDriver() {
-
-        if(driver == null) {
-            return getDriver(Browser.CHROME);
-        }
-        else {
-            return driver;
-        }
+        return driver;
     }
 
-    public static WebDriver getDriver(Browser browser) {
+    public static void startDriver(Browser browser) {
 
-        if(driver != null) {
+        if (driver != null) {
             driver.quit();
         }
 
-        switch (browser){
+        switch (browser) {
             case CHROME:
                 driver = new ChromeDriver();
                 break;
@@ -37,12 +31,15 @@ public class RunBase {
                 driver = new FirefoxDriver();
                 break;
             default:
-                throw new IllegalArgumentException("Navegador não suportado: ");
+                throw new IllegalArgumentException("Navegador não suportado");
         }
-
-        return driver;
     }
 
-
-
+    public static void quitDriver() {
+        if (driver != null) {
+            driver.quit();
+            driver = null;
+        }
+    }
 }
+
